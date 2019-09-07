@@ -1,0 +1,115 @@
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+Port {{ ssh_server_listen_port }}
+Protocol {{ ssh_server_listen_protocol }}
+
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_ecdsa_key
+#HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Ciphers and keying
+#RekeyLimit default none
+
+# Logging
+#SyslogFacility AUTH
+#LogLevel INFO
+
+# Authentication:
+LoginGraceTime {{ ssh_server_login_grace_time }}
+PermitRootLogin {{ ssh_server_permit_root_login }}
+StrictModes {{ ssh_server_strict_modes }}
+MaxAuthTries {{ ssh_server_max_auth_tries }}
+MaxSessions {{ ssh_server_max_sessions }}
+PubkeyAuthentication {{ ssh_server_pubkey_authentication }}
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication {{ ssh_server_password_authentication }}
+PermitEmptyPasswords {{ ssh_server_permit_empty_passwords }}
+
+# Expect .ssh/authorized_keys2 to be disregarded by default in future.
+#AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
+#AuthorizedPrincipalsFile none
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
+
+# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+#HostbasedAuthentication no
+# Change to yes if you don't trust ~/.ssh/known_hosts for
+# HostbasedAuthentication
+#IgnoreUserKnownHosts no
+# Don't read the user's ~/.rhosts and ~/.shosts files
+#IgnoreRhosts yes
+
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosGetAFSToken no
+
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
+
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM {{ ssh_server_use_PAM }}
+
+AllowUsers {{ ssh_server_allow_users | join(' ') }}
+
+#AllowAgentForwarding yes
+#GatewayPorts no
+AllowTcpForwarding {{ ssh_server_allow_tcp_forwarding }}
+
+X11Forwarding {{ ssh_server_x11forwarding }}
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+
+PermitTTY {{ ssh_server_permit_TTY }}
+PrintMotd {{ ssh_server_print_motd }}
+PrintLastLog {{ ssh_server_print_last_log }}
+TCPKeepAlive {{ ssh_server_TCP_keep_alive }}
+#UseLogin no
+#UsePrivilegeSeparation sandbox
+#PermitUserEnvironment no
+#Compression delayed
+ClientAliveInterval {{ ssh_server_client_alive_interval }}
+ClientAliveCountMax {{ ssh_server_client_alive_count_max }}
+#UseDNS no
+#PidFile /var/run/sshd.pid
+MaxStartups {{ ssh_server_max_startups }}
+#PermitTunnel no
+#ChrootDirectory none
+#VersionAddendum none
+
+# no default banner path
+#Banner none
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+# override default of no subsystems
+Subsystem	sftp	/usr/lib/openssh/sftp-server
