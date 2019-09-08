@@ -1,7 +1,7 @@
-Ansible role ssh-server
+Ansible role ssh_server
 =========
 
-Ansible role to automate ssh server configuration on Debian-based systems, focused on security aspects.
+Ansible role to automate SSH Server configuration on Debian-based systems, focused on security aspects.
 
 Requirements
 ------------

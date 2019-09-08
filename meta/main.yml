@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: ssh_server
   author: Santiago Martínez (@santiagomr)
   description: SSH Server configuration, focused on security aspects
 
