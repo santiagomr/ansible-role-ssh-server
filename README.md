@@ -1,38 +1,80 @@
-Role Name
+Ansible role ssh-server
 =========
 
-A brief description of the role goes here.
+Ansible role to automate ssh server configuration on Debian-based systems, focused on security aspects.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Ansible >= 2.7
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+# Allows you to customize the server motd if one is indicated
+ssh_custom_motd_path: "etc/motd/{{ inventory_hostname.split('.')[0] }}"
+
+ssh_server_listen_port: 22
+ssh_server_listen_protocol: 2
+
+ssh_server_login_grace_time: 2m
+ssh_server_permit_root_login: "prohibit-password" # prohibit-password - yes - no
+ssh_server_strict_modes: "yes"
+ssh_server_max_auth_tries: 6
+ssh_server_max_sessions: 10
+ssh_server_pubkey_authentication: "yes"
+ssh_server_password_authentication: "no" # yes or no
+ssh_server_permit_empty_passwords: "no"
+
+ssh_server_use_PAM: "yes"
+
+ssh_server_allow_users:
+  - myself
+
+ssh_server_allow_tcp_forwarding: "yes"
+
+ssh_server_x11forwarding: "yes"
+
+ssh_server_permit_TTY: "yes"
+ssh_server_print_motd: "no"
+ssh_server_print_last_log: "yes"
+ssh_server_TCP_keep_alive: "yes"
+ssh_server_client_alive_interval: 0
+ssh_server_client_alive_count_max: 3
+ssh_server_max_startups: "10:30:100"
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependencies
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- hosts: servers
+  roles:
+    - role: santiagomr.ssh-server
+      ssh_custom_motd_path: "etc/motd/{{ inventory_hostname.split('.')[0] }}"
+      ssh_server_listen_port: 2222
+      ssh_server_permit_root_login: "no"
+      ssh_server_pubkey_authentication: "yes"
+      ssh_server_password_authentication: "no"
+      ssh_server_permit_empty_passwords: "no"
+      ssh_server_use_PAM: "yes"
+      ssh_server_allow_users:
+        - myself
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------
 
-BSD
+GPL-v3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[@santiagomr](https://github.com/santiagomr)
