@@ -12,8 +12,10 @@
   notify: reload ssh server
 
 - name: Check if a motd is defined for the server
-  local_action: stat path="{{ playbook_dir }}/files/{{ ssh_custom_motd_path }}"
+  stat:
+    path: "{{ playbook_dir }}/files/{{ ssh_custom_motd_path }}"
   become: no
+  delegate_to: localhost
   register: motd_file
 
 - name: Set motd
