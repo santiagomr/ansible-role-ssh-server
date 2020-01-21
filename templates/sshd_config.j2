@@ -111,5 +111,7 @@ MaxStartups {{ ssh_server_max_startups }}
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
 
+{% if ssh_server_sftp_enabled %}
 # override default of no subsystems
 Subsystem	sftp	/usr/lib/openssh/sftp-server
+{% endif %}
