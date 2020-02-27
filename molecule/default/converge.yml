@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: Ensure /var/run/sshd directory exists
+      file:
+        path: /var/run/sshd
+        state: directory
+        owner: root
+        group: root
+
+  roles:
+    - role: santiagomr.ssh_server
