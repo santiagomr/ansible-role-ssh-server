@@ -1,6 +1,12 @@
 ---
 # tasks file for ssh_server
 
+- name: Ensure SSH server is installed
+  apt:
+    name: openssh-server
+    state: present
+    update_cache: yes
+
 - name: Set ssh server config file
   template:   # https://docs.ansible.com/ansible/latest/modules/template_module.html
     src: sshd_config.j2
