@@ -12,11 +12,15 @@ galaxy_info:
       versions:
         - buster
         - stretch
+    - name: Ubuntu
+      versions:
+        - bionic
 
   galaxy_tags:
     - system
     - security
     - debian
+    - ubuntu
     - sysadmin
     - ssh
 
