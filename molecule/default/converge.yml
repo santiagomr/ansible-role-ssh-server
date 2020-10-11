@@ -12,3 +12,4 @@
 
   roles:
     - role: santiagomr.ssh_server
+      ssh_custom_motd_path: "{{ role_path }}/files/etc/motd/example"

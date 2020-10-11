@@ -19,7 +19,7 @@
 
 - name: Check if a motd is defined for the server
   stat:
-    path: "{{ playbook_dir }}/files/{{ ssh_custom_motd_path }}"
+    path: "{{ ssh_custom_motd_path }}"
   become: no
   delegate_to: localhost
   register: motd_file

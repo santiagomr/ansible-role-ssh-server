@@ -15,8 +15,7 @@ Role Variables
 
 ```yaml
 # Allows you to customize the server motd if one is indicated
-ssh_custom_motd_path: "etc/motd/{{ inventory_hostname.split('.')[0] }}"
-
+ssh_custom_motd_path: "{{ playbook_dir }}/files/etc/motd/{{ inventory_hostname.split('.')[0] }}"
 ssh_server_listen_port: 22
 ssh_server_listen_protocol: 2
 

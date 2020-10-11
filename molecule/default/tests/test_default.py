@@ -13,3 +13,10 @@ def test_sshd_config_file(host):
     assert f.exists
     assert f.user == 'root'
     assert f.group == 'root'
+
+def test_motd_file(host):
+    f = host.file('/etc/motd')
+
+    assert f.exists
+    assert f.user == 'root'
+    assert f.group == 'root'
