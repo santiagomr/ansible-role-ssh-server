@@ -1,6 +1,6 @@
-Ansible role ssh_server 
+Ansible role ssh_server
 =========
-[![Build Status](https://travis-ci.org/santiagomr/ansible-role-ssh-server.svg?branch=master)](https://travis-ci.org/santiagomr/ansible-role-ssh-server)
+[![Build Status](https://travis-ci.com/santiagomr/ansible-role-ssh-server.svg?branch=master)](https://travis-ci.com/github/santiagomr/ansible-role-ssh-server)
 [![Galaxy](https://img.shields.io/badge/galaxy-santiagomr.ssh_server-blue.svg)](https://galaxy.ansible.com/santiagomr/ssh_server)
 
 Ansible role to automate SSH Server configuration on Debian-based systems, focused on security aspects.
